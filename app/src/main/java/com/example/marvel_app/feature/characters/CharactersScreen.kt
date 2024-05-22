@@ -1,6 +1,7 @@
 package com.example.marvel_app.feature.characters
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,11 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
 import com.example.marvel_app.domain.models.characters.Character
 import com.example.marvel_app.domain.models.common.Image
 import com.example.marvel_app.domain.models.common.Items
@@ -38,13 +37,14 @@ import com.example.marvel_app.ui.theme.MarvelAppTheme
 import com.example.marvel_app.feature.characters.ScreenState.ERROR
 import com.example.marvel_app.feature.characters.ScreenState.SUCCESS
 import com.example.marvel_app.feature.characters.ScreenState.LOADING
+import com.example.marvel_app.ui.DevicePreviews
 
 @Composable
 fun CharactersScreenRoute(
     viewModel: CharactersViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    CharactersScreen(state = state)
+    CharactersScreen(state = state, onClickCharacter = {})
     LaunchedEffect(Unit) {
         viewModel.getCharacters()
     }
@@ -53,6 +53,7 @@ fun CharactersScreenRoute(
 @Composable
 fun CharactersScreen(
     state: CharactersUiState,
+    onClickCharacter: (Character) -> Unit,
 ) {
     when (state.screenState) {
         ERROR -> ErrorView()
@@ -72,7 +73,9 @@ fun CharactersScreen(
             ) {
                 state.characters?.let { characters ->
                     items(characters.size) { item ->
-                        CharacterItem(character = characters[item])
+                        CharacterItem(
+                            character = characters[item],
+                            modifier = Modifier.clickable { onClickCharacter(characters[item]) })
                     }
                 }
             }
@@ -80,8 +83,8 @@ fun CharactersScreen(
 }
 
 @Composable
-fun CharacterItem(character: Character) {
-    Column(modifier = Modifier.padding(8.dp)) {
+fun CharacterItem(character: Character, modifier: Modifier = Modifier) {
+    Column(modifier = modifier.padding(8.dp)) {
         Card {
             AsyncImage(
                 model = character.thumbnail.asString(),
@@ -103,7 +106,7 @@ fun CharacterItem(character: Character) {
 }
 
 
-@Preview(showBackground = true)
+@DevicePreviews
 @Composable
 fun CharactersScreenPreview() = MarvelAppTheme {
     CharactersScreen(
@@ -147,6 +150,6 @@ fun CharactersScreenPreview() = MarvelAppTheme {
                 )
 
             }
-        )
+        ), onClickCharacter = {}
     )
 }
