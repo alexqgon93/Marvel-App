@@ -6,7 +6,7 @@ import com.example.marvel_app.domain.models.common.Items
 import com.example.marvel_app.domain.models.common.Stories
 import com.example.marvel_app.domain.models.common.Url
 
-data class Result(
+data class Comic(
     val characters: Characters,
     val collectedIssues: List<Item>,
     val collections: List<Any>,

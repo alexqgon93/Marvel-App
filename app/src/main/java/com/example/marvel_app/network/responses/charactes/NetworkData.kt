@@ -13,7 +13,7 @@ data class NetworkData(
     @Json(name = "offset")
     val offset: Int,
     @Json(name = "results")
-    val results: List<NetworkResult>,
+    val results: List<NetworkCharacter>,
     @Json(name = "total")
     val total: Int
 )

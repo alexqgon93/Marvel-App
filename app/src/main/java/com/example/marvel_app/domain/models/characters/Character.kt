@@ -5,7 +5,7 @@ import com.example.marvel_app.domain.models.common.Items
 import com.example.marvel_app.domain.models.common.Stories
 import com.example.marvel_app.domain.models.common.Url
 
-data class Result(
+data class Character(
     val comics: Items,
     val description: String,
     val events: Items,

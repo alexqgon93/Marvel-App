@@ -3,7 +3,7 @@ package com.example.marvel_app.data.mappers.comics
 import com.example.marvel_app.domain.models.comics.Characters
 import com.example.marvel_app.domain.models.comics.Comics
 import com.example.marvel_app.domain.models.comics.Data
-import com.example.marvel_app.domain.models.comics.Result
+import com.example.marvel_app.domain.models.comics.Comic
 import com.example.marvel_app.data.mappers.toDomainModel
 import com.example.marvel_app.domain.models.comics.Creators
 import com.example.marvel_app.domain.models.comics.Date
@@ -15,7 +15,7 @@ import com.example.marvel_app.network.responses.comics.NetworkCreators
 import com.example.marvel_app.network.responses.comics.NetworkData
 import com.example.marvel_app.network.responses.comics.NetworkDate
 import com.example.marvel_app.network.responses.comics.NetworkPrice
-import com.example.marvel_app.network.responses.comics.NetworkResult
+import com.example.marvel_app.network.responses.comics.NetworkComic
 import com.example.marvel_app.network.responses.comics.NetworkTextObject
 
 fun NetworkComics.toDomainModel() = Comics(
@@ -60,7 +60,7 @@ fun NetworkPrice.toDomainModel() = Price(
     type = type
 )
 
-fun NetworkResult.toDomainModel() = Result(
+fun NetworkComic.toDomainModel() = Comic(
     characters = characters.toDomainModel(),
     collectedIssues = collectedIssues.map { it.toDomainModel() },
     collections = collections,
