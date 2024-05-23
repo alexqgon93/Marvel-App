@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Marvel App</string>
     <string name="error_text_try_again_screen">There has been an error, please try again later</string>
+    <string name="back_icon_content_description">Back Icon Content Description</string>
 </resources>
