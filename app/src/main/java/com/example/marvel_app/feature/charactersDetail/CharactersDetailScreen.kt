@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -60,10 +61,14 @@ fun CharactersDetailScreen(state: CharactersDetailUiState) {
                     item {
                         CharacterDetailItem(character = character)
                     }
-                    section(Icons.Default.Home, "Series", character.series.items)
-                    section(Icons.Default.AccountBox, "Events", character.events.items)
-                    section(Icons.Default.AccountBox, "Comics", character.comics.items)
-                    section(Icons.Default.AccountBox, "Stories", character.stories.items)
+                    if (character.series.items.isNotEmpty())
+                        section(Icons.Default.Home, "Series", character.series.items)
+                    if (character.events.items.isNotEmpty())
+                        section(Icons.Default.AccountBox, "Events", character.events.items)
+                    if (character.comics.items.isNotEmpty())
+                        section(Icons.Default.AccountBox, "Comics", character.comics.items)
+                    if (character.stories.items.isNotEmpty())
+                        section(Icons.Default.AccountBox, "Stories", character.stories.items)
                 }
             }
     }
@@ -111,7 +116,7 @@ private fun CharacterDetailItem(character: Character) = Column(
     )
     Text(
         text = character.description,
-        textAlign = TextAlign.Center,
+        textAlign = TextAlign.Justify,
         style = MaterialTheme.typography.bodyMedium,
         modifier = Modifier
             .fillMaxWidth()

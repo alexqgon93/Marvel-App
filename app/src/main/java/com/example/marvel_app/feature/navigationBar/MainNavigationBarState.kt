@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.marvel_app.feature.characters.navigation.CHARACTER_SCREEN_ROUTE
+import com.example.marvel_app.feature.charactersDetail.navigation.CHARACTER_DETAIL_SCREEN_ROUTE
 
 @Composable
 fun rememberMainNavigationBarState(
@@ -26,7 +27,8 @@ class MainNavigationBarState(
     val titleHeader: String
         @Composable get() = when {
             currentRoute.contains(CHARACTER_SCREEN_ROUTE) -> "Characters"
-            currentRoute.contains("Comics" ) -> "Comics"
+            currentRoute.contains("Comics") -> "Comics"
+            currentRoute.contains(CHARACTER_DETAIL_SCREEN_ROUTE) -> "Character Detail"
             else -> ""
         }
 
@@ -34,6 +36,7 @@ class MainNavigationBarState(
         @Composable get() = when (currentRoute) {
             CHARACTER_SCREEN_ROUTE,
             "ComicsScreen" -> false
+
             else -> true
         }
 }
