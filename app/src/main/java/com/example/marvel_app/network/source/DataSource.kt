@@ -9,4 +9,5 @@ interface DataSource {
 
     suspend fun getCharacters(): Either<Failure, NetworkCharacters>
     suspend fun getComics(): Either<Failure, NetworkComics>
+    suspend fun getCharacterById(characterId: String): Either<Failure, NetworkCharacters>
 }

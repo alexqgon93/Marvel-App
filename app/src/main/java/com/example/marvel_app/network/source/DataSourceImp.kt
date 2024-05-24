@@ -16,4 +16,9 @@ class DataSourceImp @Inject constructor(private val apiService: ApiService) : Da
     override suspend fun getComics(): Either<Failure, NetworkComics> = tryCall {
         apiService.getComics()
     }
+
+    override suspend fun getCharacterById(characterId: String): Either<Failure, NetworkCharacters> =
+        tryCall {
+            apiService.getCharacterById(characterId)
+        }
 }

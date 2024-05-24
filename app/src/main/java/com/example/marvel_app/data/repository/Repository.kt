@@ -8,5 +8,6 @@ import com.example.marvel_app.domain.models.comics.Comics
 interface Repository {
     suspend fun getCharacters(): Either<AppError, Characters>
     suspend fun getComics(): Either<AppError, Comics>
+    suspend fun getCharacterById(characterId: String): Either<AppError, Characters>
 
 }
