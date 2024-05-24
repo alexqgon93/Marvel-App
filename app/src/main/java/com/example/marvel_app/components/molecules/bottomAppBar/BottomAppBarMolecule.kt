@@ -1,16 +1,14 @@
 package com.example.marvel_app.components.molecules.bottomAppBar
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
+import com.example.marvel_app.feature.navigationBar.isTopLevelDestinationInHierarchy
+import com.example.marvel_app.navigation.NavigationBarDestinations
 import com.example.marvel_app.ui.DevicePreviews
 import com.example.marvel_app.ui.theme.MarvelAppTheme
 
@@ -18,27 +16,26 @@ import com.example.marvel_app.ui.theme.MarvelAppTheme
 fun BottomAppBarMolecule(model: BottomAppBarMoleculeModel) = with(model) {
     NavigationBar(
         windowInsets = NavigationBarDefaults.windowInsets,
-        // containerColor = MaterialTheme.colorScheme.onSecondaryContainer,
-        // contentColor = MaterialTheme.colorScheme.onSecondary
     ) {
-        NavigationBarItem(
-            selected = true,
-            onClick = { /*TODO*/ },
-            icon = { Icon(Icons.Filled.Face, null) },
-            label = { Text(text = "Characters", color = MaterialTheme.colorScheme.onSecondary) }
-        )
-        NavigationBarItem(
-            selected = false,
-            onClick = { /*TODO*/ },
-            icon = { Icon(Icons.Default.DateRange, null) },
-            label = { Text(text = "Comics") }
-        )
-        NavigationBarItem(
-            selected = false,
-            onClick = { /*TODO*/ },
-            icon = { Icon(Icons.Filled.Favorite, null) },
-            label = { Text(text = "Favorites") }
-        )
+        destinations.forEach { item ->
+            val isSelected = currentDestination.isTopLevelDestinationInHierarchy(item)
+            NavigationBarItem(
+                selected = isSelected,
+                icon = {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = item.icon),
+                        contentDescription = item.name
+                    )
+                },
+                /*label = {
+                    Text(
+                        text = "Characters",
+                        color = MaterialTheme.colorScheme.onSecondary
+                    )
+                },*/
+                onClick = { onNavigateToDestination(item) }
+            )
+        }
     }
 }
 
@@ -47,9 +44,13 @@ fun BottomAppBarMolecule(model: BottomAppBarMoleculeModel) = with(model) {
 private fun BottomAppBarMoleculePreview() = MarvelAppTheme {
     BottomAppBarMolecule(
         BottomAppBarMoleculeModel(
-            title = "iusto",
-            onBackClick = {},
-            enabledBackPressed = false
+            destinations = listOf(
+                NavigationBarDestinations.CHARACTERS_SCREEN,
+                NavigationBarDestinations.COMICS_SCREEN,
+                NavigationBarDestinations.SETTINGS
+            ),
+            currentDestination = null,
+            onNavigateToDestination = { }
         )
     )
 }

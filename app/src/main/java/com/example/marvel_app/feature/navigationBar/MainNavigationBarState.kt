@@ -3,11 +3,15 @@ package com.example.marvel_app.feature.navigationBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
+import androidx.navigation.NavDestination
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.marvel_app.feature.characters.navigation.CHARACTER_SCREEN_ROUTE
 import com.example.marvel_app.feature.charactersDetail.navigation.CHARACTER_DETAIL_SCREEN_ROUTE
+import com.example.marvel_app.feature.main.MAIN_BOTTOM_GRAPH_ROUTE
+import com.example.marvel_app.navigation.NavigationBarDestinations
 
 @Composable
 fun rememberMainNavigationBarState(
@@ -24,6 +28,11 @@ class MainNavigationBarState(
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination?.route
             ?: ""
 
+    val topLevelDestinations = NavigationBarDestinations.entries
+
+    val currentDestination: NavDestination?
+        @Composable get() = navController.currentBackStackEntryAsState().value?.destination
+
     val titleHeader: String
         @Composable get() = when {
             currentRoute.contains(CHARACTER_SCREEN_ROUTE) -> "Characters"
@@ -32,6 +41,22 @@ class MainNavigationBarState(
             else -> ""
         }
 
+    fun onNavItemClick(route: NavigationBarDestinations) {
+        when (route) {
+            NavigationBarDestinations.CHARACTERS_SCREEN -> navController.navigatePoppingUpToStartDestination(
+                MAIN_BOTTOM_GRAPH_ROUTE
+            )
+
+            NavigationBarDestinations.COMICS_SCREEN -> navController.navigatePoppingUpToStartDestination(
+                CONTACT_GRAPH_ROUTE
+            )
+
+            NavigationBarDestinations.SETTINGS -> navController.navigatePoppingUpToStartDestination(
+                MENU_ROUTE
+            )
+        }
+    }
+
     val showUpNavigation: Boolean
         @Composable get() = when (currentRoute) {
             CHARACTER_SCREEN_ROUTE,
@@ -39,4 +64,15 @@ class MainNavigationBarState(
 
             else -> true
         }
+}
+
+fun NavHostController.navigatePoppingUpToStartDestination(route: String) {
+    navigate(route) {
+        popUpTo(graph.findStartDestination().id) {
+            saveState = true
+        }
+
+        launchSingleTop = true
+        restoreState = true
+    }
 }
