@@ -1,11 +1,9 @@
-package com.example.marvel_app.components.molecules
+package com.example.marvel_app.components.molecules.topBar
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -45,9 +43,6 @@ fun TopBarMolecule(model: TopBarMoleculeModel) = with(model) {
                 }
             } else Spacer(modifier = Modifier.size(32.dp))
         },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-        ),
         actions = {
             Spacer(modifier = Modifier.size(32.dp))
         },

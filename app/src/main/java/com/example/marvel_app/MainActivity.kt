@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MarvelAppTheme(darkTheme = false) {
+            MarvelAppTheme(darkTheme = true) {
                 RootHost()
             }
         }

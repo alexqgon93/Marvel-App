@@ -6,8 +6,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.marvel_app.components.molecules.TopBarMolecule
-import com.example.marvel_app.components.molecules.TopBarMoleculeModel
+import com.example.marvel_app.components.molecules.bottomAppBar.BottomAppBarMolecule
+import com.example.marvel_app.components.molecules.bottomAppBar.BottomAppBarMoleculeModel
+import com.example.marvel_app.components.molecules.topBar.TopBarMolecule
+import com.example.marvel_app.components.molecules.topBar.TopBarMoleculeModel
 import com.example.marvel_app.navigation.NavigationBarHost
 import com.example.marvel_app.ui.theme.MarvelAppTheme
 
@@ -23,7 +25,7 @@ fun MainNavigationBarScreen(
             TopBarMolecule(
                 model = TopBarMoleculeModel(
                     title = appState.titleHeader,
-                    onBackClick = {},
+                    onBackClick = { appState.navController.popBackStack() },
                     enabledBackPressed = appState.showUpNavigation
                 )
             )
@@ -33,7 +35,15 @@ fun MainNavigationBarScreen(
                 NavigationBarHost(appState.navController)
             }
         },
-        bottomBar = {}
+        bottomBar = {
+            BottomAppBarMolecule(
+                model = BottomAppBarMoleculeModel(
+                    title = "mus",
+                    onBackClick = {},
+                    enabledBackPressed = false
+                )
+            )
+        }
     )
 }
 

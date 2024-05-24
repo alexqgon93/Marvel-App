@@ -41,10 +41,11 @@ import com.example.marvel_app.ui.DevicePreviews
 
 @Composable
 fun CharactersScreenRoute(
-    viewModel: CharactersViewModel = hiltViewModel()
+    viewModel: CharactersViewModel = hiltViewModel(),
+    onClickCharacter: (Character) -> Unit,
 ) {
     val state by viewModel.state.collectAsState()
-    CharactersScreen(state = state, onClickCharacter = {})
+    CharactersScreen(state = state, onClickCharacter = onClickCharacter)
     LaunchedEffect(Unit) {
         viewModel.getCharacters()
     }
@@ -64,21 +65,20 @@ fun CharactersScreen(
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
 
-        SUCCESS ->
-            LazyVerticalStaggeredGrid(
-                columns = StaggeredGridCells.Adaptive(180.dp),
-                contentPadding = PaddingValues(4.dp),
-                verticalItemSpacing = 4.dp,
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-            ) {
-                state.characters?.let { characters ->
-                    items(characters.size) { item ->
-                        CharacterItem(
-                            character = characters[item],
-                            modifier = Modifier.clickable { onClickCharacter(characters[item]) })
-                    }
+        SUCCESS -> LazyVerticalStaggeredGrid(
+            columns = StaggeredGridCells.Adaptive(180.dp),
+            contentPadding = PaddingValues(4.dp),
+            verticalItemSpacing = 4.dp,
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            state.characters?.let { characters ->
+                items(characters.size) { item ->
+                    CharacterItem(
+                        character = characters[item],
+                        modifier = Modifier.clickable { onClickCharacter(characters[item]) })
                 }
             }
+        }
     }
 }
 
@@ -148,7 +148,6 @@ fun CharactersScreenPreview() = MarvelAppTheme {
                     ),
                     urls = listOf()
                 )
-
             }
         ), onClickCharacter = {}
     )
