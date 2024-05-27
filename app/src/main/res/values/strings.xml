@@ -2,4 +2,12 @@
     <string name="app_name">Marvel App</string>
     <string name="error_text_try_again_screen">There has been an error, please try again later</string>
     <string name="back_icon_content_description">Back Icon Content Description</string>
+    <string name="comic">Comic</string>
+    <string name="magazine">Magazine</string>
+    <string name="trade_paperback">Trade Paperback</string>
+    <string name="hardcover">Hardcover</string>
+    <string name="digest">Digest</string>
+    <string name="graphic_novel">Graphic Novel</string>
+    <string name="digital_comic">Digital Comic</string>
+    <string name="infinite_comic">Infinite Comic</string>
 </resources>
