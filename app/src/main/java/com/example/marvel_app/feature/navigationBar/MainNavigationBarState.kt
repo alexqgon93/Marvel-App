@@ -46,20 +46,18 @@ class MainNavigationBarState(
             else -> ""
         }
 
-    fun onNavItemClick(route: NavigationBarDestinations) {
-        when (route) {
-            NavigationBarDestinations.CHARACTERS_SCREEN -> navController.navigatePoppingUpToStartDestination(
-                MAIN_BOTTOM_GRAPH_ROUTE
-            )
+    fun onNavItemClick(route: NavigationBarDestinations) = when (route) {
+        NavigationBarDestinations.CHARACTERS_SCREEN -> navController.navigatePoppingUpToStartDestination(
+            MAIN_BOTTOM_GRAPH_ROUTE
+        )
 
-            NavigationBarDestinations.COMICS_SCREEN -> navController.navigatePoppingUpToStartDestination(
-                COMICS_GRAPH_ROUTE
-            )
+        NavigationBarDestinations.COMICS_SCREEN -> navController.navigatePoppingUpToStartDestination(
+            COMICS_GRAPH_ROUTE
+        )
 
-            NavigationBarDestinations.EVENTS -> navController.navigatePoppingUpToStartDestination(
-                EVENTS_GRAPH_ROUTE
-            )
-        }
+        NavigationBarDestinations.EVENTS -> navController.navigatePoppingUpToStartDestination(
+            EVENTS_GRAPH_ROUTE
+        )
     }
 
     val showUpNavigation: Boolean
@@ -72,13 +70,10 @@ class MainNavigationBarState(
         }
 }
 
-fun NavHostController.navigatePoppingUpToStartDestination(route: String) {
-    navigate(route) {
-        popUpTo(graph.findStartDestination().id) {
-            saveState = true
-        }
-
-        launchSingleTop = true
-        restoreState = true
+fun NavHostController.navigatePoppingUpToStartDestination(route: String) = navigate(route) {
+    popUpTo(graph.findStartDestination().id) {
+        saveState = true
     }
+    launchSingleTop = true
+    restoreState = true
 }

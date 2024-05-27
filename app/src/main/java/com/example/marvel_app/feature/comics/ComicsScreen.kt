@@ -12,7 +12,6 @@ import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -26,9 +25,9 @@ import com.example.marvel_app.components.atoms.marvelItem.MarvelItemModel
 import com.example.marvel_app.components.molecules.gridMolecule.GridItems
 import com.example.marvel_app.domain.models.comics.Comic
 import com.example.marvel_app.domain.models.common.asString
-import com.example.marvel_app.feature.comics.ScreenState.ERROR
-import com.example.marvel_app.feature.comics.ScreenState.SUCCESS
-import com.example.marvel_app.feature.comics.ScreenState.LOADING
+import com.example.marvel_app.feature.ScreenState.ERROR
+import com.example.marvel_app.feature.ScreenState.SUCCESS
+import com.example.marvel_app.feature.ScreenState.LOADING
 import com.example.marvel_app.feature.common.ErrorView
 import com.example.marvel_app.feature.toStringRes
 import com.example.marvel_app.ui.DevicePreviews
@@ -39,9 +38,6 @@ import kotlinx.coroutines.launch
 fun ComicsScreenRoute(viewModel: ComicsViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsState()
     ComicsScreen(state = state, onClickComic = {})
-    LaunchedEffect(Unit) {
-        viewModel.getComics()
-    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)

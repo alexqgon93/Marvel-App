@@ -1,19 +1,25 @@
-package com.example.marvel_app.domain.models.characters
+package com.example.marvel_app.domain.models.events
 
 import com.example.marvel_app.domain.models.common.Image
+import com.example.marvel_app.domain.models.common.Item
 import com.example.marvel_app.domain.models.common.Items
 import com.example.marvel_app.domain.models.common.Url
 
-data class Character(
+data class Event(
+    val characters: Items,
     val comics: Items,
+    val creators: Items,
     val description: String,
-    val events: Items,
+    val end: String,
     val id: Int,
     val modified: String,
-    val name: String,
+    val next: Item,
+    val previous: Item,
     val resourceURI: String,
-    val series: Items,
-    val stories: Items,
+    val series: Item,
+    val start: String,
+    val stories: Item,
     val thumbnail: Image,
+    val title: String,
     val urls: List<Url>
 )

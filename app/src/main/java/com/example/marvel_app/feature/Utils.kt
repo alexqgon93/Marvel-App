@@ -15,3 +15,5 @@ fun Comic.Format.toStringRes(): Int = when (this) {
     Comic.Format.DIGITAL_COMIC -> R.string.digital_comic
     Comic.Format.INFINITE_COMIC -> R.string.infinite_comic
 }
+
+enum class ScreenState { LOADING, SUCCESS, ERROR }
