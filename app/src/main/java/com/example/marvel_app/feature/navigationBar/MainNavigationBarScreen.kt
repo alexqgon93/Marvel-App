@@ -12,6 +12,8 @@ import com.example.marvel_app.components.molecules.bottomAppBar.BottomAppBarMole
 import com.example.marvel_app.components.molecules.bottomAppBar.BottomAppBarMoleculeModel
 import com.example.marvel_app.components.molecules.topBar.TopBarMolecule
 import com.example.marvel_app.components.molecules.topBar.TopBarMoleculeModel
+import com.example.marvel_app.feature.comics.COMICS_GRAPH_ROUTE
+import com.example.marvel_app.feature.events.EVENTS_GRAPH_ROUTE
 import com.example.marvel_app.feature.main.MAIN_BOTTOM_GRAPH_ROUTE
 import com.example.marvel_app.navigation.NavigationBarDestinations
 import com.example.marvel_app.navigation.NavigationBarHost
@@ -56,9 +58,8 @@ fun MainNavigationBarScreen(
 fun NavDestination?.isTopLevelDestinationInHierarchy(destination: NavigationBarDestinations): Boolean {
     val graph = when (destination) {
         NavigationBarDestinations.CHARACTERS_SCREEN -> MAIN_BOTTOM_GRAPH_ROUTE
-        //NavigationBarDestinations.COMICS_SCREEN -> COMICS_GRAPH_ROUTE
-        // NavigationBarDestinations.SETTINGS -> SETTINGS_GRAPH_ROUTE
-        else -> return false
+        NavigationBarDestinations.COMICS_SCREEN -> COMICS_GRAPH_ROUTE
+        NavigationBarDestinations.EVENTS -> EVENTS_GRAPH_ROUTE
     }
     return this?.hierarchy?.any {
         it.route?.contains(graph, true) ?: false

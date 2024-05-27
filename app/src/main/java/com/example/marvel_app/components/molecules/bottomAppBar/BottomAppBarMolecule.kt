@@ -47,7 +47,7 @@ private fun BottomAppBarMoleculePreview() = MarvelAppTheme {
             destinations = listOf(
                 NavigationBarDestinations.CHARACTERS_SCREEN,
                 NavigationBarDestinations.COMICS_SCREEN,
-                NavigationBarDestinations.SETTINGS
+                NavigationBarDestinations.EVENTS
             ),
             currentDestination = null,
             onNavigateToDestination = { }

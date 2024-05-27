@@ -10,6 +10,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.marvel_app.feature.characters.navigation.CHARACTER_SCREEN_ROUTE
 import com.example.marvel_app.feature.charactersDetail.navigation.CHARACTER_DETAIL_SCREEN_ROUTE
+import com.example.marvel_app.feature.comics.COMICS_GRAPH_ROUTE
+import com.example.marvel_app.feature.comics.navigation.COMICS_SCREEN_ROUTE
+import com.example.marvel_app.feature.events.EVENTS_GRAPH_ROUTE
+import com.example.marvel_app.feature.events.navigation.EVENTS_SCREEN_ROUTE
 import com.example.marvel_app.feature.main.MAIN_BOTTOM_GRAPH_ROUTE
 import com.example.marvel_app.navigation.NavigationBarDestinations
 
@@ -36,8 +40,9 @@ class MainNavigationBarState(
     val titleHeader: String
         @Composable get() = when {
             currentRoute.contains(CHARACTER_SCREEN_ROUTE) -> "Characters"
-            currentRoute.contains("Comics") -> "Comics"
+            currentRoute.contains(EVENTS_SCREEN_ROUTE) -> "Events"
             currentRoute.contains(CHARACTER_DETAIL_SCREEN_ROUTE) -> "Character Detail"
+            currentRoute.contains(COMICS_SCREEN_ROUTE) -> "Comics"
             else -> ""
         }
 
@@ -48,11 +53,11 @@ class MainNavigationBarState(
             )
 
             NavigationBarDestinations.COMICS_SCREEN -> navController.navigatePoppingUpToStartDestination(
-                CONTACT_GRAPH_ROUTE
+                COMICS_GRAPH_ROUTE
             )
 
-            NavigationBarDestinations.SETTINGS -> navController.navigatePoppingUpToStartDestination(
-                MENU_ROUTE
+            NavigationBarDestinations.EVENTS -> navController.navigatePoppingUpToStartDestination(
+                EVENTS_GRAPH_ROUTE
             )
         }
     }
@@ -60,7 +65,8 @@ class MainNavigationBarState(
     val showUpNavigation: Boolean
         @Composable get() = when (currentRoute) {
             CHARACTER_SCREEN_ROUTE,
-            "ComicsScreen" -> false
+            COMICS_SCREEN_ROUTE,
+            EVENTS_SCREEN_ROUTE -> false
 
             else -> true
         }
