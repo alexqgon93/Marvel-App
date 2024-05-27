@@ -19,23 +19,23 @@ data class NetworkEvent(
     @Json(name = "description")
     val description: String,
     @Json(name = "end")
-    val end: String,
+    val end: String?,
     @Json(name = "id")
     val id: Int,
     @Json(name = "modified")
     val modified: String,
     @Json(name = "next")
-    val next: NetworkItem,
+    val next: NetworkItem?,
     @Json(name = "previous")
-    val previous: NetworkItem,
+    val previous: NetworkItem?,
     @Json(name = "resourceURI")
     val resourceURI: String,
     @Json(name = "series")
-    val series: NetworkItem,
+    val series: NetworkItems,
     @Json(name = "start")
-    val start: String,
+    val start: String?,
     @Json(name = "stories")
-    val stories: NetworkItem,
+    val stories: NetworkItems,
     @Json(name = "thumbnail")
     val thumbnail: NetworkImage,
     @Json(name = "title")
