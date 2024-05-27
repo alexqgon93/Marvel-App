@@ -22,7 +22,7 @@ data class NetworkComic(
     @Json(name = "dates")
     val dates: List<NetworkDate>,
     @Json(name = "description")
-    val description: String,
+    val description: String?,
     @Json(name = "diamondCode")
     val diamondCode: String,
     @Json(name = "digitalId")

@@ -65,6 +65,10 @@ fun CharactersScreen(
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
 
+        SUCCESS -> MarvelListItem(
+            items = state.characters ?: emptyList(),
+            onClick = onClickCharacter
+        )
         SUCCESS -> LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Adaptive(180.dp),
             contentPadding = PaddingValues(4.dp),
@@ -78,6 +82,22 @@ fun CharactersScreen(
                         modifier = Modifier.clickable { onClickCharacter(characters[item]) })
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun MarvelListItem(items: List<Character>, onClick: (Character) -> Unit) {
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Adaptive(180.dp),
+        contentPadding = PaddingValues(4.dp),
+        verticalItemSpacing = 4.dp,
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        items(items.size) { item ->
+            CharacterItem(
+                character = items[item],
+                modifier = Modifier.clickable { onClick(items[item]) })
         }
     }
 }

@@ -12,7 +12,7 @@ data class Comic(
     val collections: List<Any>,
     val creators: Creators,
     val dates: List<Date>,
-    val description: String,
+    val description: String?,
     val diamondCode: String,
     val digitalId: Int,
     val ean: String,
