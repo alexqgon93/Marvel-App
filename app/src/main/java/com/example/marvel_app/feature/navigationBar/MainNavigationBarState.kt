@@ -12,6 +12,8 @@ import com.example.marvel_app.feature.characters.navigation.CHARACTER_SCREEN_ROU
 import com.example.marvel_app.feature.charactersDetail.navigation.CHARACTER_DETAIL_SCREEN_ROUTE
 import com.example.marvel_app.feature.comics.COMICS_GRAPH_ROUTE
 import com.example.marvel_app.feature.comics.navigation.COMICS_SCREEN_ROUTE
+import com.example.marvel_app.feature.creators.CREATORS_GRAPH_ROUTE
+import com.example.marvel_app.feature.creators.navigation.CREATORS_SCREEN_ROUTE
 import com.example.marvel_app.feature.events.EVENTS_GRAPH_ROUTE
 import com.example.marvel_app.feature.events.navigation.EVENTS_SCREEN_ROUTE
 import com.example.marvel_app.feature.main.MAIN_BOTTOM_GRAPH_ROUTE
@@ -43,6 +45,7 @@ class MainNavigationBarState(
             currentRoute.contains(EVENTS_SCREEN_ROUTE) -> "Events"
             currentRoute.contains(CHARACTER_DETAIL_SCREEN_ROUTE) -> "Character Detail"
             currentRoute.contains(COMICS_SCREEN_ROUTE) -> "Comics"
+            currentRoute.contains(CREATORS_SCREEN_ROUTE) -> "Creators"
             else -> ""
         }
 
@@ -58,14 +61,18 @@ class MainNavigationBarState(
         NavigationBarDestinations.EVENTS -> navController.navigatePoppingUpToStartDestination(
             EVENTS_GRAPH_ROUTE
         )
+
+        NavigationBarDestinations.CREATORS -> navController.navigatePoppingUpToStartDestination(
+            CREATORS_GRAPH_ROUTE
+        )
     }
 
     val showUpNavigation: Boolean
         @Composable get() = when (currentRoute) {
             CHARACTER_SCREEN_ROUTE,
             COMICS_SCREEN_ROUTE,
-            EVENTS_SCREEN_ROUTE -> false
-
+            EVENTS_SCREEN_ROUTE,
+            CREATORS_SCREEN_ROUTE-> false
             else -> true
         }
 }
