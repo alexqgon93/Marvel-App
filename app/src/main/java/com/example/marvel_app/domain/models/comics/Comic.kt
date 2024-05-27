@@ -12,12 +12,12 @@ data class Comic(
     val collections: List<Any>,
     val creators: Creators,
     val dates: List<Date>,
-    val description: String,
+    val description: String?,
     val diamondCode: String,
     val digitalId: Int,
     val ean: String,
     val events: Items,
-    val format: String,
+    val format: Format,
     val id: Int,
     val images: List<Image>,
     val isbn: String,
@@ -36,4 +36,15 @@ data class Comic(
     val urls: List<Url>,
     val variantDescription: String,
     val variants: List<Item>
-)
+) {
+    enum class Format {
+        COMIC,
+        MAGAZINE,
+        TRADE_PAPERBACK,
+        HARDCOVER,
+        DIGEST,
+        GRAPHIC_NOVEL,
+        DIGITAL_COMIC,
+        INFINITE_COMIC
+    }
+}

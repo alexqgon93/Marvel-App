@@ -71,7 +71,7 @@ fun NetworkComic.toDomainModel() = Comic(
     digitalId = digitalId,
     ean = ean,
     events = events.toDomainModel(),
-    format = format,
+    format = format.toDomainModel(),
     id = id,
     images = images.map { it.toDomainModel() },
     isbn = isbn,
@@ -97,6 +97,28 @@ fun NetworkTextObject.toDomainModel() = TextObject(
     text = text,
     type = type
 )
+
+private fun String.toDomainModel(): Comic.Format = when (this) {
+    "magazine" -> Comic.Format.MAGAZINE
+    "trade paperback" -> Comic.Format.TRADE_PAPERBACK
+    "hardcover" -> Comic.Format.HARDCOVER
+    "digest" -> Comic.Format.DIGEST
+    "graphic novel" -> Comic.Format.GRAPHIC_NOVEL
+    "digital comic" -> Comic.Format.DIGITAL_COMIC
+    "infinite comic" -> Comic.Format.INFINITE_COMIC
+    else -> Comic.Format.COMIC
+}
+
+fun Comic.Format.toStringFormat(): String = when (this) {
+    Comic.Format.COMIC -> "comic"
+    Comic.Format.MAGAZINE -> "magazine"
+    Comic.Format.TRADE_PAPERBACK -> "trade paperback"
+    Comic.Format.HARDCOVER -> "hardcover"
+    Comic.Format.DIGEST -> "digest"
+    Comic.Format.GRAPHIC_NOVEL -> "graphic novel"
+    Comic.Format.DIGITAL_COMIC -> "digital comic"
+    Comic.Format.INFINITE_COMIC -> "infinite comic"
+}
 
 
 

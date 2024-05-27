@@ -1,32 +1,19 @@
 package com.example.marvel_app.feature.characters
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
+import com.example.marvel_app.components.atoms.marvelItem.MarvelItemAtom
+import com.example.marvel_app.components.atoms.marvelItem.MarvelItemModel
+import com.example.marvel_app.components.molecules.gridMolecule.GridItems
 import com.example.marvel_app.domain.models.characters.Character
 import com.example.marvel_app.domain.models.common.Image
 import com.example.marvel_app.domain.models.common.Items
@@ -52,10 +39,7 @@ fun CharactersScreenRoute(
 }
 
 @Composable
-fun CharactersScreen(
-    state: CharactersUiState,
-    onClickCharacter: (Character) -> Unit,
-) {
+fun CharactersScreen(state: CharactersUiState, onClickCharacter: (Character) -> Unit) =
     when (state.screenState) {
         ERROR -> ErrorView()
         LOADING -> Box(
@@ -65,45 +49,16 @@ fun CharactersScreen(
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
 
-        SUCCESS -> LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Adaptive(180.dp),
-            contentPadding = PaddingValues(4.dp),
-            verticalItemSpacing = 4.dp,
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-        ) {
-            state.characters?.let { characters ->
-                items(characters.size) { item ->
-                    CharacterItem(
-                        character = characters[item],
-                        modifier = Modifier.clickable { onClickCharacter(characters[item]) })
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun CharacterItem(character: Character, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.padding(8.dp)) {
-        Card {
-            AsyncImage(
-                model = character.thumbnail.asString(),
-                contentDescription = character.name,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .background(Color.Gray)
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
-            )
-            Text(
-                text = character.name,
-                style = MaterialTheme.typography.titleMedium,
-                maxLines = 2,
-                modifier = Modifier.padding(8.dp, 16.dp)
+        SUCCESS -> GridItems(state.characters ?: emptyList()) { character ->
+            MarvelItemAtom(
+                model = MarvelItemModel(
+                    thumbnail = character.thumbnail.asString(),
+                    title = character.name
+                ),
+                modifier = Modifier.clickable { onClickCharacter(character) }
             )
         }
     }
-}
 
 
 @DevicePreviews
