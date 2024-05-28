@@ -66,8 +66,9 @@ fun ComicsScreen(state: ComicsUiState, onClickComic: (Comic) -> Unit) {
                         text = { Text(text = stringResource(id = format.toStringRes()).uppercase()) })
                 }
             }
-            HorizontalPager(state = pagerState) { _ ->
-                // TODO - Implement change over the selected tab
+            HorizontalPager(state = pagerState) { page ->
+                val format = formats[page]
+
                 GridItems(state.comics ?: emptyList()) { comic ->
                     MarvelItemAtom(
                         model = MarvelItemModel(
