@@ -17,7 +17,6 @@ import com.example.marvel_app.components.molecules.gridMolecule.GridItems
 import com.example.marvel_app.domain.models.characters.Character
 import com.example.marvel_app.domain.models.common.Image
 import com.example.marvel_app.domain.models.common.Items
-import com.example.marvel_app.domain.models.common.Stories
 import com.example.marvel_app.domain.models.common.asString
 import com.example.marvel_app.feature.common.ErrorView
 import com.example.marvel_app.ui.theme.MarvelAppTheme
@@ -85,13 +84,13 @@ fun CharactersScreenPreview() = MarvelAppTheme {
                     modified = "elitr",
                     name = "Jimmie Reilly",
                     resourceURI = "mnesarchum",
-                    series = Stories(
+                    series = Items(
                         available = 1866,
                         collectionURI = "metus",
                         items = listOf(),
                         returned = 9089
                     ),
-                    stories = Stories(
+                    stories = Items(
                         available = 1754,
                         collectionURI = "dolor",
                         items = listOf(),

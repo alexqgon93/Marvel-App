@@ -3,7 +3,6 @@ package com.example.marvel_app.domain.models.comics
 import com.example.marvel_app.domain.models.common.Image
 import com.example.marvel_app.domain.models.common.Item
 import com.example.marvel_app.domain.models.common.Items
-import com.example.marvel_app.domain.models.common.Stories
 import com.example.marvel_app.domain.models.common.Url
 
 data class Comic(
@@ -28,7 +27,7 @@ data class Comic(
     val prices: List<Price>,
     val resourceURI: String,
     val series: Item,
-    val stories: Stories,
+    val stories: Items,
     val textObjects: List<TextObject>,
     val thumbnail: Image,
     val title: String,

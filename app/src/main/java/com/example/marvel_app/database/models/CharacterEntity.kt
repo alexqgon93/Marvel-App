@@ -1,13 +1,17 @@
-package com.example.marvel_app.domain.models.characters
+package com.example.marvel_app.database.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.marvel_app.domain.models.common.Image
 import com.example.marvel_app.domain.models.common.Items
 import com.example.marvel_app.domain.models.common.Url
 
-data class Character(
+@Entity(tableName = "characterentity")
+data class CharacterEntity(
     val comics: Items,
     val description: String,
     val events: Items,
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val modified: String,
     val name: String,
