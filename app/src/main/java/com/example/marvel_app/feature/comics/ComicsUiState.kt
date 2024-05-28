@@ -5,5 +5,5 @@ import com.example.marvel_app.feature.ScreenState
 
 data class ComicsUiState(
     val screenState: ScreenState = ScreenState.LOADING,
-    val comics: List<Comic>? = null
+    val comics: List<Comic> = emptyList()
 )

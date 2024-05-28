@@ -7,6 +7,7 @@ import com.example.marvel_app.network.responses.events.NetworkEvents
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -14,7 +15,9 @@ interface ApiService {
     suspend fun getCharacters(): Response<NetworkCharacters>
 
     @GET("/v1/public/comics")
-    suspend fun getComics(): Response<NetworkComics>
+    suspend fun getComics(
+        @Query("format") format: String?
+    ): Response<NetworkComics>
 
     @GET("/v1/public/characters/{characterId}")
     suspend fun getCharacterById(

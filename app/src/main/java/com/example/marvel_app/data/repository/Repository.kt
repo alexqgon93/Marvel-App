@@ -9,7 +9,7 @@ import com.example.marvel_app.domain.models.events.Events
 
 interface Repository {
     suspend fun getCharacters(): Either<AppError, Characters>
-    suspend fun getComics(): Either<AppError, Comics>
+    suspend fun getComics(format: String): Either<AppError, Comics>
     suspend fun getCharacterById(characterId: String): Either<AppError, Characters>
     suspend fun getCreators(): Either<AppError, Creators>
     suspend fun getEvents(): Either<AppError, Events>

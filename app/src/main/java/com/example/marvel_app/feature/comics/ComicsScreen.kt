@@ -36,40 +36,49 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ComicsScreenRoute(viewModel: ComicsViewModel = hiltViewModel()) {
-    val state by viewModel.state.collectAsState()
-    ComicsScreen(state = state, onClickComic = {})
+    // val state by viewModel.state.collectAsState()
+    ComicsScreen(onClickComic = {}, onTabSelected = {})
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ComicsScreen(state: ComicsUiState, onClickComic: (Comic) -> Unit) {
-    val formats = Comic.Format.entries
+fun ComicsScreen(
+    //state: ComicsUiState,
+    viewModel: ComicsViewModel = hiltViewModel(),
+    onClickComic: (Comic) -> Unit,
+    onTabSelected: (Comic.Format) -> Unit
+) {
+    val formats = Comic.Format.entries.toList()
     val pagerState = rememberPagerState(pageCount = { formats.size })
     val scope = rememberCoroutineScope()
-    when (state.screenState) {
-        LOADING -> Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+
+    Column {
+        ScrollableTabRow(
+            selectedTabIndex = pagerState.currentPage,
+            edgePadding = 0.dp,
         ) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
-
-        SUCCESS -> Column {
-            ScrollableTabRow(
-                selectedTabIndex = pagerState.currentPage,
-                edgePadding = 0.dp
-            ) {
-                formats.forEach { format ->
-                    Tab(
-                        selected = format.ordinal == pagerState.currentPage,
-                        onClick = { scope.launch { pagerState.animateScrollToPage(format.ordinal) } },
-                        text = { Text(text = stringResource(id = format.toStringRes()).uppercase()) })
-                }
+            formats.forEach { format ->
+                Tab(
+                    selected = format.ordinal == pagerState.currentPage,
+                    onClick = { scope.launch { pagerState.animateScrollToPage(format.ordinal) } },
+                    text = { Text(text = stringResource(id = format.toStringRes()).uppercase()) })
             }
-            HorizontalPager(state = pagerState) { page ->
-                val format = formats[page]
+        }
+        HorizontalPager(state = pagerState, beyondBoundsPageCount = 0) { page ->
+            val format = formats[page]
+            viewModel.formatRequested(format)
+            val pageState by viewModel.state.getValue(format).collectAsState()
+            when (pageState.screenState) {
+                LOADING -> Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                }
 
-                GridItems(state.comics ?: emptyList()) { comic ->
+                ERROR -> ErrorView()
+
+                SUCCESS -> GridItems(pageState.comics) { comic ->
                     MarvelItemAtom(
                         model = MarvelItemModel(
                             thumbnail = comic.thumbnail.asString(),
@@ -78,8 +87,6 @@ fun ComicsScreen(state: ComicsUiState, onClickComic: (Comic) -> Unit) {
                 }
             }
         }
-
-        ERROR -> ErrorView()
     }
 }
 
@@ -87,7 +94,8 @@ fun ComicsScreen(state: ComicsUiState, onClickComic: (Comic) -> Unit) {
 @Composable
 private fun ComicsScreenPreview() = MarvelAppTheme {
     ComicsScreen(
-        state = ComicsUiState(screenState = SUCCESS),
-        onClickComic = {}
+        // state = ComicsUiState(screenState = SUCCESS),
+        onClickComic = {},
+        onTabSelected = {}
     )
 }

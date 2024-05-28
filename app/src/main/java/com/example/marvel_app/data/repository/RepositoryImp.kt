@@ -20,8 +20,8 @@ class RepositoryImp @Inject constructor(
     override suspend fun getCharacters(): Either<AppError, Characters> =
         dataSource.getCharacters().mapResult { it.toDomainModel() }
 
-    override suspend fun getComics(): Either<AppError, Comics> =
-        dataSource.getComics().mapResult { it.toDomainModel() }
+    override suspend fun getComics(format: String): Either<AppError, Comics> =
+        dataSource.getComics(format = format).mapResult { it.toDomainModel() }
 
     override suspend fun getCharacterById(characterId: String): Either<AppError, Characters> =
         dataSource.getCharacterById(characterId).mapResult { it.toDomainModel() }
