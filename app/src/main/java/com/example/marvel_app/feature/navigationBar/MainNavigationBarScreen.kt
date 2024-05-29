@@ -2,9 +2,13 @@ package com.example.marvel_app.feature.navigationBar
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -23,18 +27,25 @@ import com.example.marvel_app.ui.theme.MarvelAppTheme
 @Composable
 fun MainNavigationBarScreenRoute() = MainNavigationBarScreen()
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainNavigationBarScreen(
     appState: MainNavigationBarState = rememberMainNavigationBarState()
 ) {
+
+    val scrollState = rememberTopAppBarState()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(scrollState)
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopBarMolecule(
                 model = TopBarMoleculeModel(
                     title = appState.titleHeader,
                     onBackClick = { appState.navController.popBackStack() },
                     enabledBackPressed = appState.showUpNavigation
-                )
+                ),
+                scrollBehavior = scrollBehavior
             )
         },
         content = { padding ->
