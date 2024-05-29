@@ -5,8 +5,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -25,6 +27,15 @@ fun BottomAppBarMolecule(model: BottomAppBarMoleculeModel) = with(model) {
         destinations.forEach { item ->
             val isSelected = currentDestination.isTopLevelDestinationInHierarchy(item)
             NavigationBarItem(
+                colors = NavigationBarItemColors(
+                    selectedIconColor = Color.White,
+                    selectedTextColor = Color.White,
+                    selectedIndicatorColor = MaterialTheme.colorScheme.tertiary,
+                    unselectedIconColor = Color.Gray,
+                    unselectedTextColor = Color.Gray,
+                    disabledIconColor = Color.Gray,
+                    disabledTextColor = Color.Gray,
+                ),
                 selected = isSelected,
                 icon = {
                     Icon(
@@ -33,7 +44,7 @@ fun BottomAppBarMolecule(model: BottomAppBarMoleculeModel) = with(model) {
                     )
                 },
                 label = {
-                    Text(text = stringResource(id = item.toStringResource()), color = MaterialTheme.colorScheme.onPrimary)
+                    Text(text = stringResource(id = item.toStringResource()))
                 },
                 onClick = { onNavigateToDestination(item) }
             )

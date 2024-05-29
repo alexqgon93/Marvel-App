@@ -22,7 +22,7 @@ private val LightColorScheme = lightColorScheme(
     tertiary = tertiaryLight,
     primaryContainer = primaryContainerLight,
     onPrimary = Color.White,
-    background = Color(0xFFbbbbbb),
+    background = backgroundLight,
 )
 
 /* Other default colors to override
