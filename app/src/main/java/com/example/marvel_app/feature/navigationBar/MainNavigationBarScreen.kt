@@ -81,6 +81,4 @@ fun NavDestination?.isTopLevelDestinationInHierarchy(destination: NavigationBarD
 
 @Preview
 @Composable
-private fun MainNavigationBarScreenPreview() = MarvelAppTheme {
-    MainNavigationBarScreen()
-}
+private fun MainNavigationBarScreenPreview() = MarvelAppTheme { MainNavigationBarScreen() }

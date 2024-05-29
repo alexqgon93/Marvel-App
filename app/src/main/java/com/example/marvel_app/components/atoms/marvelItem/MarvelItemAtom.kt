@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +21,14 @@ import com.example.marvel_app.ui.theme.MarvelAppTheme
 @Composable
 fun MarvelItemAtom(model: MarvelItemModel, modifier: Modifier = Modifier) = with(model) {
     Column(modifier = modifier.padding(8.dp)) {
-        Card {
+        Card(
+            colors = CardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.onPrimary,
+                disabledContentColor = MaterialTheme.colorScheme.onPrimary
+            )
+        ) {
             AsyncImage(
                 model = thumbnail,
                 contentDescription = title,

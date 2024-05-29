@@ -51,6 +51,9 @@ fun TopBarMolecule(model: TopBarMoleculeModel, scrollBehavior: TopAppBarScrollBe
             actions = {
                 Spacer(modifier = Modifier.size(32.dp))
             },
+            colors = TopAppBarDefaults.topAppBarColors(
+               containerColor = MaterialTheme.colorScheme.primaryContainer,
+            ),
             scrollBehavior = scrollBehavior
         )
     }

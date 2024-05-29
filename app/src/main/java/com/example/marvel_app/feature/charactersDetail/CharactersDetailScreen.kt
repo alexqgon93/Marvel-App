@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -84,6 +85,17 @@ fun LazyListScope.section(icon: Int, title: String, items: List<Item>) {
     }
     items(items.size) {
         ListItem(
+            colors = ListItemColors(
+                containerColor = MaterialTheme.colorScheme.background,
+                headlineColor = MaterialTheme.colorScheme.onSurface,
+                leadingIconColor = MaterialTheme.colorScheme.onSurface,
+                overlineColor = MaterialTheme.colorScheme.onSurface,
+                supportingTextColor = MaterialTheme.colorScheme.onSurface,
+                trailingIconColor = MaterialTheme.colorScheme.onSurface,
+                disabledHeadlineColor = MaterialTheme.colorScheme.onSurface,
+                disabledLeadingIconColor = MaterialTheme.colorScheme.onSurface,
+                disabledTrailingIconColor = MaterialTheme.colorScheme.onSurface,
+            ),
             headlineContent = { Text(text = items[it].name) },
             leadingContent = {
                 Image(

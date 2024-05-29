@@ -1,6 +1,7 @@
 package com.example.marvel_app.components.molecules.bottomAppBar
 
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
@@ -19,6 +20,7 @@ import com.example.marvel_app.ui.theme.MarvelAppTheme
 fun BottomAppBarMolecule(model: BottomAppBarMoleculeModel) = with(model) {
     NavigationBar(
         windowInsets = NavigationBarDefaults.windowInsets,
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
     ) {
         destinations.forEach { item ->
             val isSelected = currentDestination.isTopLevelDestinationInHierarchy(item)
@@ -31,7 +33,7 @@ fun BottomAppBarMolecule(model: BottomAppBarMoleculeModel) = with(model) {
                     )
                 },
                 label = {
-                    Text(text = stringResource(id = item.toStringResource()))
+                    Text(text = stringResource(id = item.toStringResource()), color = MaterialTheme.colorScheme.onPrimary)
                 },
                 onClick = { onNavigateToDestination(item) }
             )
