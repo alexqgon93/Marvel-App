@@ -33,7 +33,7 @@ fun TopBarMolecule(model: TopBarMoleculeModel, scrollBehavior: TopAppBarScrollBe
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Text(text = model.title, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(text = model.title)
                 }
             },
             navigationIcon = {
@@ -49,9 +49,6 @@ fun TopBarMolecule(model: TopBarMoleculeModel, scrollBehavior: TopAppBarScrollBe
             actions = {
                 Spacer(modifier = Modifier.size(32.dp))
             },
-            colors = TopAppBarDefaults.topAppBarColors(
-               containerColor = MaterialTheme.colorScheme.primaryContainer,
-            ),
             scrollBehavior = scrollBehavior
         )
     }
