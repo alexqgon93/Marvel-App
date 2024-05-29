@@ -7,5 +7,6 @@ import com.example.marvel_app.domain.models.characters.Characters
 import javax.inject.Inject
 
 class UseCaseCharacters @Inject constructor(private val repository: Repository) {
-    suspend operator fun invoke(): Either<AppError, Characters> = repository.getCharacters()
+    suspend operator fun invoke(offset: Int, limit: Int): Either<AppError, Characters> =
+        repository.getCharacters(offset, limit)
 }

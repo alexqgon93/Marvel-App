@@ -15,7 +15,7 @@ class ComicsViewModel @Inject constructor(private val useCaseComics: UseCaseComi
     val state = _state.asStateFlow()
 
     fun getComics() = viewModelScope.launch {
-        useCaseComics.invoke().fold(
+        useCaseComics.invoke(offset = 0, limit = 100).fold(
             ifLeft = {
                 _state.value = ComicsUiState(screenState = ScreenState.ERROR)
             },

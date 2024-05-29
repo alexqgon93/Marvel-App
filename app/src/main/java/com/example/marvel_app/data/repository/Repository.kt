@@ -6,8 +6,8 @@ import com.example.marvel_app.domain.models.characters.Characters
 import com.example.marvel_app.domain.models.comics.Comics
 
 interface Repository {
-    suspend fun getCharacters(): Either<AppError, Characters>
-    suspend fun getComics(): Either<AppError, Comics>
+    suspend fun getCharacters(offset: Int, limit: Int): Either<AppError, Characters>
+    suspend fun getComics(offset: Int, limit: Int): Either<AppError, Comics>
     suspend fun getCharacterById(characterId: String): Either<AppError, Characters>
 
 }

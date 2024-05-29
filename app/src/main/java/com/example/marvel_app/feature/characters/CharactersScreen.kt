@@ -32,9 +32,9 @@ fun CharactersScreenRoute(
 ) {
     val state by viewModel.state.collectAsState()
     CharactersScreen(state = state, onClickCharacter = onClickCharacter)
-    LaunchedEffect(Unit) {
-        viewModel.getCharacters()
-    }
+//    LaunchedEffect(Unit) {
+//        viewModel.getCharacters()
+//    }
 }
 
 @Composable
