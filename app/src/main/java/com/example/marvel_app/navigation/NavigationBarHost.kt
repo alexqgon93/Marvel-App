@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.marvel_app.feature.comics.comicsNavGraph
+import com.example.marvel_app.feature.creators.creatorsNavGraph
 import com.example.marvel_app.feature.events.eventsNavGraph
 import com.example.marvel_app.feature.main.MAIN_BOTTOM_GRAPH_ROUTE
 import com.example.marvel_app.feature.main.mainHomeNavGraph
@@ -24,5 +25,6 @@ fun NavigationBarHost(
         mainHomeNavGraph(navController = navController)
         comicsNavGraph()
         eventsNavGraph()
+        creatorsNavGraph()
     }
 }

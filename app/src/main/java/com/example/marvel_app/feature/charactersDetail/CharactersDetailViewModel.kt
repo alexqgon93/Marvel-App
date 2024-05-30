@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marvel_app.domain.usecases.UseCaseCharacter
+import com.example.marvel_app.feature.ScreenState
 import com.example.marvel_app.feature.charactersDetail.navigation.CHARACTER_DETAIL_ARGUMENT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

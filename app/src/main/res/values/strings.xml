@@ -10,4 +10,8 @@
     <string name="graphic_novel">Graphic Novel</string>
     <string name="digital_comic">Digital Comic</string>
     <string name="infinite_comic">Infinite Comic</string>
+    <string name="creators">Creators</string>
+    <string name="characters">Characters</string>
+    <string name="events">Events</string>
+    <string name="comics">Comics</string>
 </resources>

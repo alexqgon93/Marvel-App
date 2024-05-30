@@ -1,0 +1,11 @@
+package com.example.marvel_app.domain.usecases
+
+import arrow.core.Either
+import com.example.marvel_app.data.repository.Repository
+import com.example.marvel_app.domain.common.AppError
+import com.example.marvel_app.domain.models.creators.Creators
+import javax.inject.Inject
+
+class UseCaseCreators @Inject constructor(private val repository: Repository) {
+    suspend operator fun invoke(): Either<AppError, Creators> = repository.getCreators()
+}

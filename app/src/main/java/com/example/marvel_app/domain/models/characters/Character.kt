@@ -2,7 +2,6 @@ package com.example.marvel_app.domain.models.characters
 
 import com.example.marvel_app.domain.models.common.Image
 import com.example.marvel_app.domain.models.common.Items
-import com.example.marvel_app.domain.models.common.Stories
 import com.example.marvel_app.domain.models.common.Url
 
 data class Character(
@@ -13,8 +12,8 @@ data class Character(
     val modified: String,
     val name: String,
     val resourceURI: String,
-    val series: Stories,
-    val stories: Stories,
+    val series: Items,
+    val stories: Items,
     val thumbnail: Image,
     val urls: List<Url>
 )

@@ -7,5 +7,5 @@ import com.example.marvel_app.domain.models.comics.Comics
 import javax.inject.Inject
 
 class UseCaseComics @Inject constructor(private val repository: Repository) {
-    suspend operator fun invoke(): Either<AppError, Comics> = repository.getComics()
+    suspend operator fun invoke(format: String): Either<AppError, Comics> = repository.getComics(format = format)
 }

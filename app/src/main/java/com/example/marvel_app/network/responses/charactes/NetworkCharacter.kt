@@ -3,7 +3,6 @@ package com.example.marvel_app.network.responses.charactes
 
 import com.example.marvel_app.network.responses.common.NetworkImage
 import com.example.marvel_app.network.responses.common.NetworkItems
-import com.example.marvel_app.network.responses.common.NetworkStories
 import com.example.marvel_app.network.responses.common.NetworkUrl
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -25,9 +24,9 @@ data class NetworkCharacter(
     @Json(name = "resourceURI")
     val resourceURI: String,
     @Json(name = "series")
-    val series: NetworkStories,
+    val series: NetworkItems,
     @Json(name = "stories")
-    val stories: NetworkStories,
+    val stories: NetworkItems,
     @Json(name = "thumbnail")
     val thumbnail: NetworkImage,
     @Json(name = "urls")

@@ -3,6 +3,7 @@ package com.example.marvel_app.feature.characters
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marvel_app.domain.usecases.UseCaseCharacters
+import com.example.marvel_app.feature.ScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,19 +19,21 @@ class CharactersViewModel @Inject constructor(
     private val _state = MutableStateFlow(CharactersUiState())
     val state = _state.asStateFlow()
 
-    fun getCharacters() = viewModelScope.launch {
-        useCaseCharacters.invoke().fold(
-            ifLeft = {
-                _state.update { it.copy(screenState = ScreenState.ERROR) }
-            },
-            ifRight = {characters ->
-                _state.update {
-                    it.copy(
-                        screenState = ScreenState.SUCCESS,
-                        characters = characters.data.results
-                    )
+    init {
+        viewModelScope.launch {
+            useCaseCharacters.invoke().fold(
+                ifLeft = {
+                    _state.update { it.copy(screenState = ScreenState.ERROR) }
+                },
+                ifRight = { characters ->
+                    _state.update {
+                        it.copy(
+                            screenState = ScreenState.SUCCESS,
+                            characters = characters.data.results
+                        )
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }
