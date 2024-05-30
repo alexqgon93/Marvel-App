@@ -35,19 +35,11 @@ import com.example.marvel_app.ui.theme.MarvelAppTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun ComicsScreenRoute(viewModel: ComicsViewModel = hiltViewModel()) {
-    // val state by viewModel.state.collectAsState()
-    ComicsScreen(onClickComic = {}, onTabSelected = {})
-}
+fun ComicsScreenRoute() = ComicsScreen(onClickComic = {})
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ComicsScreen(
-    //state: ComicsUiState,
-    viewModel: ComicsViewModel = hiltViewModel(),
-    onClickComic: (Comic) -> Unit,
-    onTabSelected: (Comic.Format) -> Unit
-) {
+fun ComicsScreen(viewModel: ComicsViewModel = hiltViewModel(), onClickComic: (Comic) -> Unit) {
     val formats = Comic.Format.entries.toList()
     val pagerState = rememberPagerState(pageCount = { formats.size })
     val scope = rememberCoroutineScope()
@@ -83,7 +75,8 @@ fun ComicsScreen(
                         model = MarvelItemModel(
                             thumbnail = comic.thumbnail.asString(),
                             title = comic.title
-                        ), modifier = Modifier.clickable { onClickComic(comic) })
+                        ),
+                        modifier = Modifier.clickable { onClickComic(comic) })
                 }
             }
         }
@@ -92,10 +85,4 @@ fun ComicsScreen(
 
 @DevicePreviews
 @Composable
-private fun ComicsScreenPreview() = MarvelAppTheme {
-    ComicsScreen(
-        // state = ComicsUiState(screenState = SUCCESS),
-        onClickComic = {},
-        onTabSelected = {}
-    )
-}
+private fun ComicsScreenPreview() = MarvelAppTheme { ComicsScreen(onClickComic = {}) }
