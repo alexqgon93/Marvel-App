@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -20,9 +19,9 @@ import com.example.marvel_app.domain.models.common.Items
 import com.example.marvel_app.domain.models.common.asString
 import com.example.marvel_app.feature.common.ErrorView
 import com.example.marvel_app.ui.theme.MarvelAppTheme
-import com.example.marvel_app.feature.characters.ScreenState.ERROR
-import com.example.marvel_app.feature.characters.ScreenState.SUCCESS
-import com.example.marvel_app.feature.characters.ScreenState.LOADING
+import com.example.marvel_app.feature.ScreenState.ERROR
+import com.example.marvel_app.feature.ScreenState.SUCCESS
+import com.example.marvel_app.feature.ScreenState.LOADING
 import com.example.marvel_app.ui.DevicePreviews
 
 @Composable
@@ -32,9 +31,6 @@ fun CharactersScreenRoute(
 ) {
     val state by viewModel.state.collectAsState()
     CharactersScreen(state = state, onClickCharacter = onClickCharacter)
-//    LaunchedEffect(Unit) {
-//        viewModel.getCharacters()
-//    }
 }
 
 @Composable
@@ -62,7 +58,7 @@ fun CharactersScreen(state: CharactersUiState, onClickCharacter: (Character) -> 
 
 @DevicePreviews
 @Composable
-fun CharactersScreenPreview() = MarvelAppTheme {
+private fun CharactersScreenPreview() = MarvelAppTheme {
     CharactersScreen(
         state = CharactersUiState(
             screenState = SUCCESS, characters = (1..10).map {
