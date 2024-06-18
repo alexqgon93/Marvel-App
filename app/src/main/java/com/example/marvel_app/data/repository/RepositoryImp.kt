@@ -17,11 +17,16 @@ import javax.inject.Inject
 class RepositoryImp @Inject constructor(
     private val dataSource: DataSource,
 ) : Repository {
-    override suspend fun getCharacters(): Either<AppError, Characters> =
-        dataSource.getCharacters().mapResult { it.toDomainModel() }
+    override suspend fun getCharacters(offset: Int, limit: Int): Either<AppError, Characters> =
+        dataSource.getCharacters(offset = offset, limit = limit).mapResult { it.toDomainModel() }
 
-    override suspend fun getComics(format: String): Either<AppError, Comics> =
-        dataSource.getComics(format = format).mapResult { it.toDomainModel() }
+    override suspend fun getComics(
+        format: String,
+        offset: Int,
+        limit: Int
+    ): Either<AppError, Comics> =
+        dataSource.getComics(format = format, offset = offset, limit = limit)
+            .mapResult { it.toDomainModel() }
 
     override suspend fun getCharacterById(characterId: String): Either<AppError, Characters> =
         dataSource.getCharacterById(characterId).mapResult { it.toDomainModel() }

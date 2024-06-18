@@ -11,12 +11,15 @@ import com.example.marvel_app.network.utils.tryCall
 import javax.inject.Inject
 
 class DataSourceImp @Inject constructor(private val apiService: ApiService) : DataSource {
-    override suspend fun getCharacters(): Either<Failure, NetworkCharacters> = tryCall {
-        apiService.getCharacters()
+    override suspend fun getCharacters(
+        offset: Int,
+        limit: Int
+    ): Either<Failure, NetworkCharacters> = tryCall {
+        apiService.getCharacters(offset = offset, limit = limit)
     }
 
-    override suspend fun getComics(format: String): Either<Failure, NetworkComics> = tryCall {
-        apiService.getComics(format = format)
+    override suspend fun getComics(format: String, offset: Int, limit: Int): Either<Failure, NetworkComics> = tryCall {
+        apiService.getComics(format = format, offset = offset, limit = limit)
     }
 
     override suspend fun getCharacterById(characterId: String): Either<Failure, NetworkCharacters> =

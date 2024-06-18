@@ -12,11 +12,16 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("/v1/public/characters")
-    suspend fun getCharacters(): Response<NetworkCharacters>
+    suspend fun getCharacters(
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int,
+    ): Response<NetworkCharacters>
 
     @GET("/v1/public/comics")
     suspend fun getComics(
-        @Query("format") format: String?
+        @Query("format") format: String?,
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int,
     ): Response<NetworkComics>
 
     @GET("/v1/public/characters/{characterId}")

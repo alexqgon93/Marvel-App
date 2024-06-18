@@ -9,8 +9,8 @@ import com.example.marvel_app.network.utils.Failure
 
 interface DataSource {
 
-    suspend fun getCharacters(): Either<Failure, NetworkCharacters>
-    suspend fun getComics(format: String): Either<Failure, NetworkComics>
+    suspend fun getCharacters(offset: Int, limit: Int): Either<Failure, NetworkCharacters>
+    suspend fun getComics(format: String, offset: Int, limit: Int): Either<Failure, NetworkComics>
     suspend fun getCharacterById(characterId: String): Either<Failure, NetworkCharacters>
     suspend fun getCreators(): Either<Failure, NetworkCreators>
     suspend fun getEvents(): Either<Failure, NetworkEvents>

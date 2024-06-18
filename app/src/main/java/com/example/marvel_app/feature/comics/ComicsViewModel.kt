@@ -22,7 +22,7 @@ class ComicsViewModel @Inject constructor(private val useCaseComics: UseCaseComi
         if (comics.isEmpty()) {
             viewModelScope.launch {
                 uiState.value = ComicsUiState(screenState = ScreenState.LOADING)
-                useCaseComics.invoke(format = format.toStringFormat()).fold(
+                useCaseComics.invoke(format = format.toStringFormat(), offset = 0, limit = 10).fold(
                     ifLeft = {
                         uiState.update { it.copy(screenState = ScreenState.ERROR) }
                     },
